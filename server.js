@@ -10,7 +10,7 @@ const config = {
   server: '103.133.122.173',
   database: 'jbkDev',
   options: {
-    encrypt: true,
+    encrypt: false,
     trustServerCertificate: true,
   },
 };
