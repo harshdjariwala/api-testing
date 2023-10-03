@@ -61,6 +61,40 @@ app.get('/getAssignedMenus', async (req, res) => {
   }
 });
 
+app.get('/getMenuHeaders', async (req, res) => {
+    try {
+      const request = new sql.Request();
+      const result = await request.query('EXEC uspGetMenuHeaders');
+      res.json(result.recordset);
+    } catch (err) {
+      console.error('Error executing SQL query:', err);
+      res.status(500).send('Error executing SQL query.');
+    } finally {
+      sql.close(); // Close the database connection after the query is executed
+    }
+  });
+
+app.get('/getUserRoles', async (req, res) => {
+    const iRoleUserId = req.query.iRoleUserId;
+  
+    if (!iRoleUserId) {
+      return res.status(400).send('Please provide a valid iRoleUserId parameter.');
+    }
+  
+    try {
+      const request = new sql.Request();
+      request.input('iRoleUserId', sql.Int, iRoleUserId); // Assuming iRoleUserId is an integer, adjust the type accordingly
+      const result = await request.query('EXEC uspGetUserRoles @iRoleUserId');
+      res.json(result.recordset);
+    } catch (err) {
+      console.error('Error executing SQL query:', err);
+      res.status(500).send('Error executing SQL query.');
+    } finally {
+      sql.close(); // Close the database connection after the query is executed
+    }
+});
+
+
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
   connectToDatabase();
