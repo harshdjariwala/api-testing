@@ -8,7 +8,7 @@ const config = {
   user: 'sa',
   password: 'bank@Yb3S9',
   server: '103.133.122.173',
-  database: 'userdb',
+  database: 'ERPUserDb',
   options: {
     encrypt: true,
     trustServerCertificate: true,
