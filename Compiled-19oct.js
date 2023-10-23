@@ -203,8 +203,8 @@ app.get('/getAssignedMenus', async (req, res) => {
 //getMenuHeaders
 app.get('/getMenuHeaders', async (req, res) => {
   try {
-    const request = pool.request();
-    const result = await request.execute('uspGetMenuHeaders');
+    const request = new sql.Request();
+    const result = await request.query('EXEC uspGetMenuHeaders');
     res.json(result.recordset);
   } catch (err) {
     console.error('Error executing SQL query:', err);
